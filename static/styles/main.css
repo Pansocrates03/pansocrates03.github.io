@@ -14,8 +14,9 @@
     
 }
 
+
 .content {
-    font-size: 1.5vw;
+    font-size: 3vh;
     padding: 10%;
 
     margin: 0;
@@ -86,7 +87,7 @@ h1 {
 
 h2 {
     margin: 0;
-    font-size: 3vw;
+    font-size: 4vh;
     padding: 5%;
 }
 
