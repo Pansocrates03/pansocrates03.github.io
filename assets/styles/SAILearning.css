@@ -5,18 +5,24 @@ body {
 }
 h1 {
     font-size: xx-large;
+    margin-bottom: 0;
+}
+.subtitle {
+    font-size: larger;
+    margin-bottom: 0.67em;
+    color: #919191;
 }
 p {
     text-align: justify;
 }
-ul {
+.columna-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.columna-item {
     margin-right: 10%;
     margin-left: 10%;
-}
-
-.columnas {
-    display: flex;
-    justify-content: center;
 }
 .divider {
     width: 100%;
