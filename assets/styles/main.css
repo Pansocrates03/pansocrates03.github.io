@@ -16,10 +16,10 @@
 
 
 .content {
-    font-size: 3vh;
+    font-size: 2.5vh;
     padding: 10%;
 
-    margin: 0;
+        
 
     
 }
@@ -28,6 +28,8 @@
     background-color: aliceblue;
     margin-left: 1vw;
     margin-right: 1vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     border-radius: 30px;
     z-index: 100;
 }
@@ -50,7 +52,7 @@
 
 #grid {
     display: grid;
-    grid-template-columns: 20vw 20vw 20vw 20vw;
+    grid-template-columns: 40vw 40vw;
 
 }
 
