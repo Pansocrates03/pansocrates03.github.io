@@ -29,3 +29,11 @@ p {
     height: 3px;
     background-color: #f1f0f0;
 }
+.authorsList{
+    display: flex;
+
+}
+.author{
+    width: 100%;
+    text-align: center;
+}
