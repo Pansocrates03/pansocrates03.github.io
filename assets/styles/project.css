@@ -31,9 +31,11 @@ p {
 }
 .authorsList{
     display: flex;
+    flex-wrap: wrap;
 
 }
 .author{
-    width: 100%;
+    min-width: 100px;
+    max-width: 20%;
     text-align: center;
 }
