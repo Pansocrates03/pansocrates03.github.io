@@ -1,180 +1,412 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" type="text/css" href="./assets/styles/normalize.css">
-    <link rel="stylesheet" type="text/css" href="./assets/styles/main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/styles/blockAnimation.css">
-    
-    <title>Esteban Sierra Baccio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esteban Sierra Baccio — AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FAFAF7;
+    --bg-alt: #F2F1EC;
+    --ink: #1B1D1E;
+    --ink-soft: #54585C;
+    --line: #E1DFD7;
+    --accent: #2C4BFF;
+    --accent-soft: #EDF0FF;
+    --accent-ink: #14245C;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --maxw: 1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent); color:#fff;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,250,247,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:var(--maxw); margin:0 auto; padding:18px 32px;
+  }
+  .logo{
+    font-family:var(--mono); font-size:14px; font-weight:500;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block;}
+  .navlinks{display:flex; gap:32px; font-size:14px; color:var(--ink-soft);}
+  .navlinks a{transition:color .2s;}
+  .navlinks a:hover{color:var(--accent);}
+  .navcta{
+    font-family:var(--mono); font-size:13px; border:1px solid var(--ink);
+    padding:8px 16px; border-radius:2px; transition:all .2s;
+  }
+  .navcta:hover{background:var(--ink); color:var(--bg);}
+  .navmobile{display:none;}
+
+  /* HERO */
+  .hero{
+    padding:110px 0 90px;
+    border-bottom:1px solid var(--line);
+    position:relative; overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:60px; align-items:end;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    letter-spacing:.06em; margin-bottom:22px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:24px; height:1px; background:var(--accent);}
+  .hero h1{
+    font-family:var(--serif); font-weight:600; font-size:clamp(40px,6vw,72px);
+    line-height:1.04; letter-spacing:-0.01em; margin-bottom:26px;
+  }
+  .hero h1 em{font-style:italic; color:var(--accent); font-weight:500;}
+  .hero p.lead{
+    font-size:18px; color:var(--ink-soft); max-width:46ch; margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; padding:13px 22px; border-radius:2px;
+    display:inline-flex; align-items:center; gap:8px; transition:all .2s;
+  }
+  .btn-primary{background:var(--ink); color:var(--bg);}
+  .btn-primary:hover{background:var(--accent);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  .hero-panel{
+    background:var(--ink); color:var(--bg);
+    padding:28px; border-radius:4px; font-family:var(--mono); font-size:13px;
+    position:relative;
+  }
+  .hero-panel .ph-title{color:#8C90A0; margin-bottom:18px; display:flex; justify-content:space-between;}
+  .hero-panel .ph-dots span{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:5px;}
+  .ph-line{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dashed #33363F;}
+  .ph-line:last-child{border-bottom:none;}
+  .ph-key{color:#8C90A0;}
+  .ph-val{color:#fff;}
+
+  /* SECTION GENERIC */
+  section{padding:90px 0; border-bottom:1px solid var(--line);}
+  .section-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:48px; gap:20px; flex-wrap:wrap;}
+  .section-num{font-family:var(--mono); font-size:13px; color:var(--accent);}
+  .section-head h2{font-family:var(--serif); font-size:clamp(28px,3.4vw,38px); font-weight:600;}
+  .section-sub{color:var(--ink-soft); font-size:14px; max-width:32ch; text-align:right;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px;}
+  .about-grid p{color:var(--ink-soft); font-size:16.5px; margin-bottom:18px;}
+  .about-grid p strong{color:var(--ink); font-weight:600;}
+  .stat-list{display:flex; flex-direction:column; gap:0;}
+  .stat{display:flex; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--line);}
+  .stat:first-child{padding-top:0;}
+  .stat-label{font-size:14px; color:var(--ink-soft);}
+  .stat-val{font-family:var(--serif); font-size:20px; font-weight:600; text-align:right;}
+
+  /* EXPERIENCE */
+  .timeline{display:flex; flex-direction:column;}
+  .tl-item{
+    display:grid; grid-template-columns:160px 1fr; gap:32px; padding:28px 0; border-bottom:1px solid var(--line);
+  }
+  .tl-item:first-child{padding-top:0;}
+  .tl-item:last-child{border-bottom:none;}
+  .tl-date{font-family:var(--mono); font-size:13px; color:var(--ink-soft); padding-top:4px;}
+  .tl-role{font-size:18px; font-weight:600; margin-bottom:4px;}
+  .tl-org{font-family:var(--mono); font-size:13px; color:var(--accent); margin-bottom:12px;}
+  .tl-desc{color:var(--ink-soft); font-size:15px;}
+  .tl-desc li{margin-bottom:8px; list-style:none; position:relative; padding-left:18px;}
+  .tl-desc li::before{content:'→'; position:absolute; left:0; color:var(--accent);}
+
+  /* PROJECTS */
+  .proj-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .proj-card{background:var(--bg); padding:32px; transition:background .25s;}
+  .proj-card:hover{background:var(--accent-soft);}
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;}
+  .proj-title{font-size:18px; font-weight:600;}
+  .proj-tag{font-family:var(--mono); font-size:11px; color:var(--accent); background:var(--accent-soft); padding:4px 9px; border-radius:20px; white-space:nowrap;}
+  .proj-card:hover .proj-tag{background:#fff;}
+  .proj-desc{color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;}
+  .proj-stack{display:flex; flex-wrap:wrap; gap:6px;}
+  .stack-chip{font-family:var(--mono); font-size:11px; color:var(--ink-soft); border:1px solid var(--line); padding:3px 8px; border-radius:2px;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line);}
+  .skill-col{padding:24px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .skill-col h3{font-family:var(--mono); font-size:12px; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px;}
+  .skill-col ul{list-style:none;}
+  .skill-col li{font-size:14.5px; padding:5px 0; color:var(--ink-soft);}
+
+  /* EDUCATION */
+  .edu-card{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px;
+    background:var(--ink); color:var(--bg); padding:44px; border-radius:4px;
+  }
+  .edu-card .eyebrow{color:#9AA6FF;}
+  .edu-card .eyebrow::before{background:#9AA6FF;}
+  .edu-card h3{font-family:var(--serif); font-size:26px; margin-bottom:8px;}
+  .edu-meta{font-family:var(--mono); font-size:13px; color:#9CA0AC; margin-bottom:20px;}
+  .edu-card p{color:#C7C9D1; font-size:14.5px; margin-bottom:16px;}
+  .awards{list-style:none;}
+  .awards li{font-size:14px; padding:9px 0; border-bottom:1px solid #34363F; color:#D7D9E0;}
+  .awards li:last-child{border-bottom:none;}
+  .awards li::before{content:'★ '; color:var(--accent-soft); opacity:.7;}
+
+  /* CONTACT */
+  .contact-wrap{text-align:center; padding-top:30px;}
+  .contact-wrap .eyebrow{justify-content:center;}
+  .contact-wrap h2{font-family:var(--serif); font-size:clamp(34px,5vw,56px); font-weight:600; margin-bottom:20px;}
+  .contact-wrap p{color:var(--ink-soft); max-width:48ch; margin:0 auto 36px;}
+  .contact-links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+
+  footer{padding:32px; text-align:center; font-family:var(--mono); font-size:12px; color:var(--ink-soft);}
+
+  @media (max-width:860px){
+    .navlinks{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr; gap:30px;}
+    .proj-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .edu-card{grid-template-columns:1fr;}
+    .tl-item{grid-template-columns:1fr; gap:8px;}
+    .section-sub{text-align:left;}
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Clean code<br>Effective solutions</h1>
-        <p id="subtitle">< Esteban Sierra, Dev. /></Esteban></p>
-        
-    </header>
-
-
-    <div class="page">
-        <h2>About me</h2>
-        <p class="content">
-            Back at the pandemic, boredom made me try new things:
-            I learnt to play the guitar, got into videogames, and
-            discovered coding discord bots. That took me into the
-            amazing journey of creating online experiences through
-            the magic of coding. 
-            <br><br>
-            Today I’m studying Computer Technologies at Monterrey’s
-            Technology Institute and my life has changed for good.
-            I have developed awesome projects for college, I already
-            won my first hackathon and I am willing to continue learning
-            from tech companies who can help me grow. Glouu Technologies
-            was the first of them who believed in my work.
-            <br><br>
-            When I’m not at the computer, I’m usually rehearsing dance, drama or
-            gone for a hike.
-        </p>
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>ESTEBAN SIERRA BACCIO</div>
+    <div class="navlinks">
+      <a href="#about">Perfil</a>
+      <a href="#experience">Experiencia</a>
+      <a href="#projects">Proyectos</a>
+      <a href="#skills">Stack</a>
+      <a href="#education">Educación</a>
     </div>
+    <a href="#contact" class="navcta">Contactar →</a>
+  </nav>
+</header>
 
-
-    <div class="page">
-        <h2>Studies & Experience</h2>
-        <p class="content">
-            2024-2026 (currently studying)
-            <br>Computer Tech. Engineering. at Tec de Monterrey
-            <br><br>
-            Jan 2024 - Feb 2024
-            <br>Programmer at Glouu Technologies
-            <br><br>
-            Aug 2023 - Dec 2023
-            <br>Programming Coordinator at Youth Science
-        </p>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">AI ENGINEER · MONTERREY, MX</div>
+      <h1>Construyo sistemas de <em>IA</em> que la gente realmente usa.</h1>
+      <p class="lead">Ingeniero en Tecnologías Computacionales con especialidad en Inteligencia Artificial Avanzada. Diseño agentes, modelos y aplicaciones full-stack que pasan de prototipo a producción.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">Ver proyectos ↓</a>
+        <a href="mailto:e.s.baccio@gmail.com" class="btn btn-ghost">e.s.baccio@gmail.com</a>
+      </div>
     </div>
+    <div class="hero-panel">
+      <div class="ph-title">
+        <span>~/esteban — status</span>
+        <span class="ph-dots"><span style="background:#FF5F57"></span><span style="background:#FEBC2E"></span><span style="background:#28C840"></span></span>
+      </div>
+      <div class="ph-line"><span class="ph-key">role</span><span class="ph-val">AI Engineering Intern</span></div>
+      <div class="ph-line"><span class="ph-key">focus</span><span class="ph-val">Agents · ML · Full-stack</span></div>
+      <div class="ph-line"><span class="ph-key">gpa</span><span class="ph-val">90 / 100</span></div>
+      <div class="ph-line"><span class="ph-key">grad</span><span class="ph-val">June 2026</span></div>
+      <div class="ph-line"><span class="ph-key">hackathons_won</span><span class="ph-val">2</span></div>
+      <div class="ph-line"><span class="ph-key">languages</span><span class="ph-val">ES (native) · EN (C1)</span></div>
+    </div>
+  </div>
+</section>
 
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-num">01 — PERFIL</div>
+      <h2 style="font-family:var(--serif); font-size:clamp(28px,3.4vw,38px); font-weight:600; margin:14px 0 26px;">Ingeniería con criterio de negocio</h2>
+      <p><strong>Ingeniero en Tecnologías Computacionales</strong> especializado en Inteligencia Artificial Avanzada, con trayectoria comprobada en desarrollo full-stack y optimización algorítmica.</p>
+      <p>Combino experiencia técnica profunda con habilidades de comunicación y liderazgo cultivadas dirigiendo proyectos — lo que me permite traducir arquitecturas técnicas complejas en estrategias de negocio claras y accionables.</p>
+      <p>Actualmente despliego agentes de IA a escala universitaria, construyo bases de datos vectoriales y desarrollo modelos de machine learning de extremo a extremo.</p>
+    </div>
+    <div class="stat-list">
+      <div class="stat"><span class="stat-label">Promedio académico</span><span class="stat-val">90 / 100</span></div>
+      <div class="stat"><span class="stat-label">Graduación esperada</span><span class="stat-val">Jun 2026</span></div>
+      <div class="stat"><span class="stat-label">Usuarios atendidos (ATLAS)</span><span class="stat-val">9,000 docentes</span></div>
+      <div class="stat"><span class="stat-label">Precisión modelo Titanic ML</span><span class="stat-val">85%</span></div>
+      <div class="stat"><span class="stat-label">Hackathons ganados</span><span class="stat-val">Hack MTY '23 · Capital One '26</span></div>
+      <div class="stat"><span class="stat-label">Idiomas</span><span class="stat-val">Español · Inglés C1</span></div>
+    </div>
+  </div>
+</section>
 
-    <div class="page">
-        <h2>Projects</h2>
-        <div id="grid" class="content">
-
-            <a class="portFolio-Obj" href="./pages/ReportManager.html">
-                <h3>Report Manager</h3>
-                <div class="black_div"></div>
-                <p class="project_description">
-                    To make sure items are taken care of in stores, 
-                    whirlpool employees report to promotors if 
-                    something looks wrong. To make this process faster, a 
-                    team and I developed a mobile app that sends the 
-                    information to promotors so they can take care of any 
-                    problem. For the project I oversaw the server-side backend
-                    and database, so I learnt the usage of Django's framework,
-                    SQL and Linux for the app deployment.
-                </p>
-
-            </a>
-
-            <a class="portFolio-Obj" href="./pages/DinoBlocks.html">
-                <h3>Dino Blocks</h3>
-                <div class="black_div"></div>
-                <p class="project_description">
-                    One of the hardest parts of learning to code is 
-                    understanding the computer logic. Dinoblocks is a
-                    game-based web application with the 
-                    objective of code logic development for kids through different games 
-                    and school-made statistics software to check in.
-                    I mainly developed the world statistics web page 
-                    using python’s Streamlit framework and SQL for the 
-                    database. This was a Hack MTY project winner for “best 
-                    Streamlit use”
-                </p>
-                
-            </a>
-
-        
-
-            <a class="portFolio-Obj" href="./pages/SAILearning.html">
-                <h3>SAI Learning</h3>
-                <div class="black_div"></div>
-                <p class="project_description">
-                    Deaf people struggle to communicate since learning sign 
-                    language is not easily accessible. That is why we
-                    developed a learning web application to help eradicate this 
-                    problem. I worked mainly in the frontend development but 
-                    also helped with backend debugging. I learnt to use React 
-                    and Django to make sure this project work as expected.
-                </p>
-
-
-
-
-                <p></p>
-            </a>
-
-            <a class="portFolio-Obj" href="https://google.com">
-                <h3>Datex</h3>
-                <div class="black_div"></div>
-                <p class="project_description">
-                    Corporations usually have huge databases with big
-                    amounts of information, this information might become 
-                    complicated to understand. That is why I developed to 
-                    Glouu Technologies a database explainer using GPT4. 
-                    Datex was created using python’s frameworks ‘Llamaindex’ 
-                    and ‘Fast Api’. I learnt both frameworks from cero
-                </p>
-            </a>
-
-
-
-                </div>
-
-                <p></p>
-            </a>
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">02 — EXPERIENCIA</div>
+        <h2>Trayectoria profesional</h2>
+      </div>
+      <div class="section-sub">Del aula a producción: agentes desplegados a escala institucional.</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">FEB 2026 — JUN 2026</div>
+        <div>
+          <div class="tl-role">Educational AI Developer Intern</div>
+          <div class="tl-org">Tecnológico de Monterrey</div>
+          <ul class="tl-desc">
+            <li>Desarrollo de <strong>Alexandria</strong>, un agente bibliotecario de IA construido con el Microsoft Agent Framework de Python; recomienda libros mediante búsqueda en base de datos vectorial y rastrea Amazon para ampliar el catálogo. Desplegado en contenedores Docker a nivel nacional.</li>
+            <li>Desarrollo de <strong>ATLAS</strong>, un agente de IA potenciado por OpenClaw que funge como asistente docente, entregando reportes de alumnos automáticamente al teléfono del profesor y al correo del estudiante. Da servicio a más de 9,000 docentes de la universidad.</li>
+          </ul>
         </div>
-    </div>
-
-
-    <div class="page">
-        <h2>Contact</h2>
-        <p class="content" id="center">
-            <img src="./assets/images/Dino.png">
-            <br>
-            Esteban Sierra Baccio<br>
-            <br>+52 477 836 0020 | e.s.baccio@gmail.com<br>
-            <br>Monterrey, NL. México.
-        </p>
-    </div>
-
-    <footer>
-        <div id="division"></div>
-        <div id="logos">
-            <a href="https://www.linkedin.com/in/esteban-sierra-baccio-814271148/">
-                <img src="./assets/svg/linkedin-svgrepo-com.svg">
-            </a>
-            <a href="https://github.com/Pansocrates03">
-                <img src="./assets/svg/github-svgrepo-com.svg">
-            </a>
-            <a href="mailto:e.s.baccio@gmail.com">
-                <img src="./assets/svg/email-open-svgrepo-com.svg">
-            </a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">ENE 2025 — MAR 2025</div>
+        <div>
+          <div class="tl-role">Fullstack Developer</div>
+          <div class="tl-org">Miracoli Developers</div>
+          <ul class="tl-desc">
+            <li>Diseño de base de datos relacional para sistemas de seguridad física.</li>
+            <li>Aplicación web para renta de salones de fiesta con React, ExpressJS y la API de Google Calendar para reservaciones automáticas según el pago del usuario.</li>
+          </ul>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">03 — PROYECTOS</div>
+        <h2>Trabajo seleccionado</h2>
+      </div>
+      <div class="section-sub">Productos propios, consultoría y modelos de ML.</div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-top"><span class="proj-title">Master Schedule Maker</span><span class="proj-tag">SaaS</span></div>
+        <p class="proj-desc">Sistema de gestión de horarios para preparatorias usando algoritmos greedy, backtracking y de intercambio (swap) para optimización. Pagos por suscripción vía Stripe; desplegado en Railway.</p>
+        <div class="proj-stack"><span class="stack-chip">Algoritmos</span><span class="stack-chip">Stripe API</span><span class="stack-chip">Railway</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><span class="proj-title">Sai Learning</span><span class="proj-tag">Visión por computadora</span></div>
+        <p class="proj-desc">Aplicación web que enseña Lengua de Señas Mexicana mediante visión por computadora, verificando las señas del usuario en tiempo real y ofreciendo retroalimentación.</p>
+        <div class="proj-stack"><span class="stack-chip">Computer Vision</span><span class="stack-chip">Real-time</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><span class="proj-title">Softtek — SCRUM Manager</span><span class="proj-tag">Cliente</span></div>
+        <p class="proj-desc">Sistema de gestión de proyectos SCRUM con login, tablero kanban y vista previa de datos, potenciado con IA para automatización de tareas.</p>
+        <div class="proj-stack"><span class="stack-chip">React</span><span class="stack-chip">ExpressJS</span><span class="stack-chip">Firebase</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><span class="proj-title">Ternium — Análisis logístico</span><span class="proj-tag">Cliente</span></div>
+        <p class="proj-desc">Análisis descriptivo profesional impulsado por modelos de IA para caracterizar los costos de transporte de Ternium en todo México.</p>
+        <div class="proj-stack"><span class="stack-chip">Data Analysis</span><span class="stack-chip">IA aplicada</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><span class="proj-title">Titanic — Machine Learning</span><span class="proj-tag">85% accuracy</span></div>
+        <p class="proj-desc">Modelo predictivo de supervivencia de pasajeros usando Regresión Logística, SVM y Random Forest, alcanzando 85% de precisión.</p>
+        <div class="proj-stack"><span class="stack-chip">Scikit-learn</span><span class="stack-chip">Random Forest</span><span class="stack-chip">SVM</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-top"><span class="proj-title">Alexandria & ATLAS</span><span class="proj-tag">Agentes IA</span></div>
+        <p class="proj-desc">Suite de agentes institucionales: un bibliotecario IA con búsqueda vectorial y un asistente docente que automatiza reportes para miles de usuarios.</p>
+        <div class="proj-stack"><span class="stack-chip">Agent Framework</span><span class="stack-chip">Docker</span><span class="stack-chip">Vector DB</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <ul class="circles" id="elementoAbsoluto">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-    </ul>
-    <script src="./assets/scripts/blockAnimation.js"></script>
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">04 — STACK</div>
+        <h2>Herramientas y tecnologías</h2>
+      </div>
+      <div class="section-sub">De modelos a producción, sin perder de vista la infraestructura.</div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h3>Lenguajes</h3>
+        <ul><li>Python</li><li>JavaScript</li><li>TypeScript</li><li>SQL</li><li>C++</li></ul>
+      </div>
+      <div class="skill-col">
+        <h3>Frameworks</h3>
+        <ul><li>React</li><li>SvelteKit</li><li>ExpressJS</li><li>Django</li><li>FastAPI</li></ul>
+      </div>
+      <div class="skill-col">
+        <h3>Cloud & Datos</h3>
+        <ul><li>Azure</li><li>AWS</li><li>Google Cloud</li><li>Supabase / Firebase</li><li>PostgreSQL · Oracle</li></ul>
+      </div>
+      <div class="skill-col">
+        <h3>Herramientas</h3>
+        <ul><li>Stripe</li><li>Git</li><li>Figma</li><li>Railway</li><li>Android Studio</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-num">05 — EDUCACIÓN</div>
+        <h2>Formación y reconocimientos</h2>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="eyebrow">TEC DE MONTERREY · CAMPUS MONTERREY</div>
+        <h3>Ing. en Tecnologías Computacionales</h3>
+        <div class="edu-meta">Minor en Inteligencia Artificial Avanzada · Promedio 90/100 · Graduación: Jun 2026</div>
+        <p>Materias relevantes: Estructuras de Datos y Algoritmos, IA Avanzada para Ciencia de Datos, Desarrollo de Software, Desarrollo de Aplicaciones Avanzado.</p>
+        <p style="font-size:13px; color:#9CA0AC;">También fundador y director de <em>Galeones Teatro</em>, compañía con varias puestas en escena entre 2025 y 2026.</p>
+      </div>
+      <div>
+        <h3 style="font-size:15px; font-family:var(--mono); text-transform:uppercase; color:#9AA6FF; margin-bottom:14px; letter-spacing:.04em;">Distinciones</h3>
+        <ul class="awards">
+          <li>Segundo lugar — Capital One Day Hack 2026</li>
+          <li>Ganador — Hack Monterrey 2023</li>
+          <li>Finalista — Expo Ingenierías 2024</li>
+          <li>Beca 50% por talento estudiantil</li>
+          <li>Mejor actor — Gala Borrego</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap contact-wrap">
+    <div class="eyebrow">06 — CONTACTO</div>
+    <h2>Hablemos de tu próximo<br>sistema de IA.</h2>
+    <p>Disponible para roles de AI Engineering, prácticas o colaboraciones. Abierto a reubicación.</p>
+    <div class="contact-links">
+      <a href="mailto:e.s.baccio@gmail.com" class="btn btn-primary">e.s.baccio@gmail.com</a>
+      <a href="https://linkedin.com/in/esteban-sierra-baccio-814271148" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/Pansocrates03" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="tel:+524778360020" class="btn btn-ghost">+52 477 836 0020</a>
+    </div>
+  </div>
+</section>
+
+<footer>Esteban Sierra Baccio — Monterrey, NL · Hecho con Claude</footer>
+
 </body>
 </html>
